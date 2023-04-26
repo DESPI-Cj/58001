@@ -26,7 +26,7 @@ class Calculator:
 
         self.btn5 = Button(win, bd=1, width="6", text="/", height="2")
         self.btn5.grid(row=2, sticky="w",padx=200, pady=2)
-       # self.btn5.bind('<Button-1>', self.divide)
+        self.btn5.bind('<Button-1>', self.divide)
 
         self.btn6 = Button(win, bd=1, width="8", text="4", height="2")
         self.btn6.grid(row=3, sticky="w",padx=5,pady=2)
@@ -58,7 +58,7 @@ class Calculator:
 
         self.btn13 = Button(win, bd=1, width="6", text="-", height="2")
         self.btn13.grid(row=4, sticky="w", padx=200, pady=2)
-        #self.btn1.bind('<Button-1>', self.clear)
+        self.btn13.bind('<Button-1>', self.subtraction)
 
         self.btn14 = Button(win, bd=1, width="10", text="0", height="2")
         self.btn14.grid(row=5, sticky="w",padx=5,pady=2)
@@ -132,40 +132,71 @@ class Calculator:
         self.txt1.insert(1, str(num1) + ".")
 
     def addition(self, event):
-        self.n1 += int(self.txt1.get())
+        self.n1 += float(self.txt1.get())
         self.txt1.delete(0, END)
-        print(self.n1)
         self.operation = "+"
+    def subtraction(self, event):
+        if self.n1 == 0:
+            self.n1 = float(self.txt1.get())
+            self.txt1.delete(0, END)
+            self.operation = "-"
+            print(self.n1)
+        else:
+            self.n1 -= float(self.txt1.get())
+            self.txt1.delete(0, END)
+            self.operation = "-"
+            print(self.n1)
+
     def multiply(self, event):
         if self.n1 == 0:
             self.n1 = 1
-            self.n1 *= int(self.txt1.get())
+            self.n1 *= float(self.txt1.get())
             self.txt1.delete(0, END)
             self.operation = "*"
         else:
-            self.n1 *= int(self.txt.get())
+            self.n1 *= float(self.txt.get())
             self.txt1.delete(0, END)
             self.operation = "*"
-
-
-    def multipy(self, event):
-        pass
+    def divide(self, event):
+        if self.n1 == 0:
+            self.n1 = float(self.txt1.get())
+            self.txt1.delete(0, END)
+            self.operation = "/"
+        else:
+            self.n1 /= float(self.txt.get())
+            self.txt1.delete(0, END)
+            self.operation = "/"
 
     def result(self, event):
         if self.operation == "+":
             n3 = 0
-            self.n2 = int(self.txt1.get())
+            self.n2 = float(self.txt1.get())
             self.txt1.delete(0, END)
             n3 = self.n1 + self.n2
-            self.txt1.insert(0, int(n3))
-            self.n1 = int(self.txt1.get())
+            self.txt1.insert(0, float(n3))
+            self.n1 = float(self.txt1.get())
+        if self.operation == "-":
+            n3 = 0
+            self.n2 = float(self.txt1.get())
+            self.txt1.delete(0, END)
+            n3 = self.n1 - self.n2
+            self.txt1.insert(0, float(n3))
+            self.n1 = float(self.txt1.get())
         if self.operation == "*":
             n3 = 0
-            self.n2 = int(self.txt1.get())
+            self.n2 = float(self.txt1.get())
             self.txt1.delete(0, END)
             n3 = self.n1 * self.n2
-            self.txt1.insert(0, int(n3))
-            self.n1 = int(self.txt1.get())
+            self.txt1.insert(0, float(n3))
+            self.n1 = float(self.txt1.get())
+        if self.operation == "/":
+            n3 = 0
+            self.n2 = float(self.txt1.get())
+            self.txt1.delete(0, END)
+            n3 = self.n1/self.n2
+            self.txt1.insert(0, float(n3))
+            self.n1 = float(self.txt1.get())
+
         self.n1 = 0
 
 
